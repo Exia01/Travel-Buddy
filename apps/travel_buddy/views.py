@@ -5,6 +5,7 @@ from django.core import serializers
 from .models import Destination, User
 
 def ajax_testing(request):
+
     this_user_id = request.session['id']
     this_user = User.objects.get(id=int(this_user_id))
     my_trips = this_user.have_joined.all()
@@ -13,10 +14,10 @@ def ajax_testing(request):
     all_trips = Destination.objects.exclude(users_on_trip=this_user_id)
 
 
-    print(my_trips_json)
+    # print(my_trips_json)
 
     context = {
-        'all_trips'    : all_trips,
+        # 'all_trips'    : all_trips,
         'my_trips_json': my_trips_json,
     }
 
@@ -96,10 +97,10 @@ def add_trip(request):
 
 def process_add(request):
     # --- Pass in the request.POST **and** SESSION
+
+    data = request.POST
+    print(data)
     results = Destination.objects.dest_validator(request.POST, int(request.session['id']))
-    print("*"*25)
-    print('RESULTS: ', results)
-    print("*"*25)
 
     if results[0]:
         return redirect('/travels')
