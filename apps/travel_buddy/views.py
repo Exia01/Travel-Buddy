@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import HttpResponse, redirect, render
 from django.core import serializers
+from django.http import JsonResponse
 
 from .models import Destination, User
 
@@ -97,21 +98,22 @@ def add_trip(request):
 
 def process_add(request):
     # --- Pass in the request.POST **and** SESSION
-
     data = request.POST
     print(data)
     results = Destination.objects.dest_validator(request.POST, int(request.session['id']))
 
-    if results[0]:
-        return redirect('/travels')
-    else:
-        for error in results[1]:
-            messages.add_message(request, messages.ERROR,error, extra_tags='register')
-        # return redirect('/travels/add')
-        return redirect('/')
+    return JsonResponse(results)
+
+    # if results[0]:
+    #     return redirect('/travels')
+    # else:
+    #     print('errors did happen')
+    #     for error in results[1]:
+    #         messages.add_message(request, messages.ERROR,error, extra_tags='register')
+    #     return redirect('/')
 
 
-    return redirect('/')
+    # return redirect('/')
 
 
 def join_trip(request, trip_id):

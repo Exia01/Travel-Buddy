@@ -1,14 +1,11 @@
 $(document).ready(function () {
 
-
-
+    /* Hides the form */
     function time() {
         setTimeout(function () {
             $('.form_container').slideToggle("swing");
         }, 2000);
     }
-
-
 
 
     /* Enables the csrftoken */
@@ -65,7 +62,8 @@ $(document).ready(function () {
                 start_date: $('#start_datepicker').val(),
                 end_date: $('#end_datepicker').val(),
             },
-            success: function (data) {
+            success: function (serverResponse, info) {
+                console.log(`This is from the server response ${serverResponse}`)
                 for (let dInfo of Object.keys(info)) {
                     $("#placeholder3").append(`<p>${info[dInfo]}</p>`)
                 }

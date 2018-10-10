@@ -71,9 +71,9 @@
             <h2>Create a new trip</h2>
             <form id="add_trip_ajax_form" class="form-group" action="/process_add" method="post">
               {% csrf_token %}
-              Destination:<input type="text" name="location" value="" id="dest">
+              Destination:<input type="text" name="location" value="" id="dest" >
 
-              Description:<input type="text" name="description" value="" id="descript">
+              Description:<input type="text" name="description" value="" id="descript" >
 
               Travel Date From:<input id="start_datepicker" type="date" name="start_date" min="2018-05-21" value=""
                 required>
