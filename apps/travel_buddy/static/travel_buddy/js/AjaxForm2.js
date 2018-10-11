@@ -85,17 +85,17 @@ $(document).ready(function () {
     $('#ajax_load').click(function () {
         console.log('clicked')
         $.ajax({
-            method: 'GET',
             url: 'all.json',
             data: $(this).serialize(),
             success: function (data) {
+                $('#placeholder3').html("hello world")
+                $('#placeholder1').append(data)
+                $('#placeholder1').prepend(data)
                 console.log(data)
-                /* // console.log('Success: ', data);
-                for (let dInfo of Object.keys(data)) {
-                    $("#placeholder1").append(`<p>${data[dInfo]}</p>`)   } */
-
-                $('#placeholder1').html(data)
             }
         });
     });
+    /* // console.log('Success: ', data);
+    for (let dInfo of Object.keys(data)) {
+        $("#placeholder1").append(`<p>${data[dInfo]}</p>`)   } */
 })
