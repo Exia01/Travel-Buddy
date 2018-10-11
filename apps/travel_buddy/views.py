@@ -145,6 +145,7 @@ def all_html(request):
 
     queryset = this_user.have_joined.all()
     queryset = serializers.serialize("json", queryset)
+    # print(queryset)
     
     return HttpResponse(queryset, content_type="application/json")
 
