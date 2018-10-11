@@ -125,7 +125,7 @@ def ajax_testing(request):
     all_trips = Destination.objects.exclude(users_on_trip=this_user_id)
 
 
-    print(my_trips_json)
+    # print(my_trips_json)
 
     context = {
         'all_trips'    : all_trips,
@@ -143,19 +143,15 @@ def all_html(request):
     this_user_id = request.session['id']
     this_user = User.objects.get(id=int(this_user_id))
 
-    my_trips = this_user.have_joined.all()
-    # my_trips_json = serializers.serialize("json", my_trips)
+    queryset = this_user.have_joined.all()
+    queryset = serializers.serialize("json", queryset)
+    
+    return HttpResponse(queryset, content_type="application/json")
 
     # all_trips = Destination.objects.all()
     # all_trips = Destination.objects.exclude(users_on_trip=this_user_id)
 
-    context = {
-        # 'all_trips'     : all_trips,
-        # 'my_trips_json' : my_trips_json,
-        'my_trips' : my_trips
-    }
 
-    return render(request, 'travel_buddy/all.html', context)
 
 def all_json(request):
     this_user_id = request.session['id']

@@ -142,7 +142,10 @@
             url: 'all_html',
             data: $(this).serialize(),
             success: function(data) {
-              console.log('Success: ', data);
+              // console.log('Success: ', data);
+              for (let dInfo of Object.keys(data)) {
+                    $("#placeholder1").append(`<p>${data[dInfo]}</p>`)
+                }
               $('#placeholder1').html(data)
             }
           });
