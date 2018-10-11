@@ -3,14 +3,14 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Travel Buddy</title>
     {% load static %}
     <!-- LOAD JQuery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- LOAD BOOTSTRAP  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
-      integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <!-- LOAD CSS STYLESHEET -->
+    <title>Travel Buddy</title>
     <link rel="stylesheet" href="{% static 'travel_buddy/css/travel_styles.css' %}">
   </head>
 
@@ -59,9 +59,8 @@
           <div class="row">
             <!-- <a href="/travels/add"><button class="add_trip_btn btn btn-warning" type="button" name="button">Add Travel Plan</button></a> -->
 
-            <button id='add_trip_btn' class="btn btn-warning" type="button" name="button">Add Travel Plan</button>
+            <button id='add_trip_btn' class="btn btn-warning" type="button" name="button">Add Travel Plan</button><br> <p> </p>
 
-            <button id="ajax_btn" class="btn btn-success" type="button" name="button">AJAX Testing</button>
 
             <button id="ajax_load" class="btn btn-success" type="button" name="button">Load Data</button>
           </div>
@@ -86,6 +85,13 @@
           </div>
           <div id='placeholder3' style='margin-top:35px; border:1px solid silver; width:750px; padding:10px;'>
             Placeholder for the Ajax Form part II
+          </div>
+
+          <div class="fetch">
+            <div id='placeholder1' style='margin-top:35px; border:1px solid silver; width:750px; padding:10px;'>
+              <p>TEsting</p>
+
+            </div>
           </div>
           
 

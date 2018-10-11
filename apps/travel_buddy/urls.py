@@ -22,7 +22,10 @@ urlpatterns = [
     url(r'^travels/join_trip/(?P<trip_id>\d+)$', views.join_trip),
     url(r'^travels/remove_trip/(?P<trip_id>\d+)$', views.delete_trip),
 
-    
-    url(r'^travels/ajax_testing$', views.ajax_testing),
+
+
+     # AJAX ROUTES
+    url(r'^ajax$', views.ajax),
+    url(r'^all.json$', views.all_json),
 
 ]

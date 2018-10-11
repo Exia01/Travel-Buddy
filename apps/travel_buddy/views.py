@@ -5,26 +5,6 @@ from django.http import JsonResponse
 
 from .models import Destination, User
 
-def ajax_testing(request):
-
-    this_user_id = request.session['id']
-    this_user = User.objects.get(id=int(this_user_id))
-    my_trips = this_user.have_joined.all()
-    my_trips_json = serializers.serialize("json", my_trips)
-
-    all_trips = Destination.objects.exclude(users_on_trip=this_user_id)
-
-
-    # print(my_trips_json)
-
-    context = {
-        # 'all_trips'    : all_trips,
-        'my_trips_json': my_trips_json,
-    }
-
-    # return HttpResponse(my_trips_json, content_type='application/json', context)
-    return render(request, 'travel_buddy/ajax_dashboard.html', context)
-    # return HttpResponse("I have been JSON Summoned!")
 
 def trip_log_reg(request):
     return render(request, 'travel_buddy/trip_log-reg.html')
@@ -40,7 +20,7 @@ def process_reg(request):
     else:
         for error in results[1]:
             messages.add_message(request, messages.ERROR,
-  error, extra_tags='register')
+                                 error, extra_tags='register')
         return redirect('/main')
 
 
@@ -100,7 +80,8 @@ def process_add(request):
     # --- Pass in the request.POST **and** SESSION
     data = request.POST
     print(data)
-    results = Destination.objects.dest_validator(request.POST, int(request.session['id']))
+    results = Destination.objects.dest_validator(
+        request.POST, int(request.session['id']))
 
     return JsonResponse(results)
 
@@ -111,7 +92,6 @@ def process_add(request):
     #     for error in results[1]:
     #         messages.add_message(request, messages.ERROR,error, extra_tags='register')
     #     return redirect('/')
-
 
     # return redirect('/')
 
@@ -132,6 +112,37 @@ def leave_trip(request, trip_id):
     user_to_join.have_joined.remove(this_trip)
     return redirect('/travels')
 
+
 def delete_trip(req, trip_id):
     this_trip = Destination.objects.get(id=trip_id).delete()
     return redirect('/travels')
+
+
+### Here be Dragons ###
+def all_json(request):
+    this_user_id = request.session['id']
+    this_user = User.objects.get(id=int(this_user_id))
+
+    queryset = this_user.have_joined.all()
+    queryset = serializers.serialize("json", queryset)
+
+    return HttpResponse(queryset, content_type="application/json")
+
+
+def ajax(request):
+    this_user_id = request.session['id']
+    this_user = User.objects.get(id=int(this_user_id))
+    my_trips = this_user.have_joined.all()
+    my_trips_json = serializers.serialize("json", my_trips)
+
+    all_trips = Destination.objects.exclude(users_on_trip=this_user_id)
+
+    # print(my_trips_json)
+
+    context = {
+        # 'all_trips'    : all_trips,
+        'my_trips_json': my_trips_json,
+    }
+
+    return render(request, 'travel_buddy/ajax_dashboard.html', context)
+    # return HttpResponse("I have been JSON Summoned!")
