@@ -79,11 +79,11 @@ def add_trip(request):
 def process_add(request):
     # --- Pass in the request.POST **and** SESSION
     data = request.POST
-    print(data)
+    # print(data)
     results = Destination.objects.dest_validator(
         request.POST, int(request.session['id']))
 
-    return JsonResponse(results)
+    return HttpResponse(results, content_type="application/json")
 
     # if results[0]:
     #     return redirect('/travels')
@@ -127,7 +127,6 @@ def all_json(request):
     queryset = serializers.serialize("json", queryset)
 
     return HttpResponse(queryset, content_type="application/json")
-
 
 def ajax(request):
     this_user_id = request.session['id']
