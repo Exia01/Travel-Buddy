@@ -78,22 +78,11 @@ def add_trip(request):
 
 def process_add(request):
     # --- Pass in the request.POST **and** SESSION
-    data = request.POST
-    # print(data)
+    print('Hit process_add')
     results = Destination.objects.dest_validator(
         request.POST, int(request.session['id']))
 
     return HttpResponse(results, content_type="application/json")
-
-    # if results[0]:
-    #     return redirect('/travels')
-    # else:
-    #     print('errors did happen')
-    #     for error in results[1]:
-    #         messages.add_message(request, messages.ERROR,error, extra_tags='register')
-    #     return redirect('/')
-
-    # return redirect('/')
 
 
 def join_trip(request, trip_id):

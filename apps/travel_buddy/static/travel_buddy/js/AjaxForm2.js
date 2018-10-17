@@ -40,7 +40,6 @@ $(document).ready(function() {
 
   $('#add_trip_ajax_form').submit(function(e) {
     e.preventDefault(e);
-    console.log('Working');
     let info = {
       location: $('#dest').val(),
       description: $('#descript').val(),
@@ -59,29 +58,20 @@ $(document).ready(function() {
         start_date: $('#start_datepicker').val(),
         end_date: $('#end_datepicker').val()
       },
-        success: function (serverResponse, info, error) {
-            if (error) {
-                $('#placeholder3').html(err.responseText);
-          }
-        console.log(`This is from the server response ${serverResponse}`);
-        for (let dInfo of Object.keys(info)) {
-          $('#placeholder3').append(`<p>${info[dInfo]}</p>`);
-        }
+      success: function (data) {
+          console.log(data)
         time();
         $('form').trigger('reset');
       },
-      /* error: function(err, data) {
+      error: function(err) {
         console.log('====================================');
 
         console.log(`This is from the error ${err} \n`);
-        console.log('====================================');
-        console.log(`This is from the data ${data}`);
-        console.log('====================================');
 
         console.log(err.responseText);
         console.log('====================================');
         $('#placeholder3').html(err.responseText);
-      } */
+      } 
     });
   });
 
