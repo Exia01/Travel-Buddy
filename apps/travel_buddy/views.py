@@ -125,8 +125,8 @@ def ajax_testing(request):
     all_trips = Destination.objects.exclude(users_on_trip=this_user_id)
     all_trips_json = serializers.serialize("json", all_trips)
 
-    print(my_trips_json)
-    print(all_trips_json)
+    # print(my_trips_json)
+    # print(all_trips_json)
 
     context = {
         'all_trips_json': all_trips_json,
@@ -166,17 +166,17 @@ def all_json(request):
     return HttpResponse(serializers.serialize('json', my_trips), content_type='application/json')
 
 def create(request):
-    print("Creating Trip...")
-    print("*"*25)
+    # print("Creating Trip...")
+    # print("*"*25)
 
-    print('Request: ', request)
-    print("*"*25)
-    print('Request POST: ', request.POST);
-    print("*"*25)
+    # print('Request: ', request)
+    # print("*"*25)
+    # print('Request POST: ', request.POST);
+    # print("*"*25)
     this_user_id = request.session['id']
     this_user = User.objects.get(id=this_user_id)
-    print('User: ', this_user)
-    print("*"*25)
+    # print('User: ', this_user)
+    # print("*"*25)
     location = Destination.objects.create(location=request.POST['location'], description=request.POST['description'], start_date=request.POST['start_date'], end_date=request.POST['end_date'], planner=this_user)
     print('Location: ', location)
     my_trips = this_user.have_joined.add(location)
